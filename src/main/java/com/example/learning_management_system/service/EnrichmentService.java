@@ -8,14 +8,20 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 @Service
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-@Getter
 public class EnrichmentService {
 
     private final Map<String, Enrichment> enrichmentImpl;
+    @Getter
+    private final List<Message> processedMessages = Collections.synchronizedList(new ArrayList<>());
+    @Getter
+    private final List<Message> unprocessedMessages = Collections.synchronizedList(new ArrayList<>());
 
     public String enrich(Message message) {
         if (MessageValidator.validMessage(message)) {

@@ -8,6 +8,6 @@ public class Message {
     private EnrichmentType enrichmentType;
 
     public enum EnrichmentType {
-        MSISDN, QWE;
+        MSISDN;
     }
 }
