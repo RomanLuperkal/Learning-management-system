@@ -17,6 +17,7 @@ public class UserRepositoryImpl implements UserRepository{
 
     @Override
     public String getUserFullname(Long msisdn) throws EnrichException {
+        //todo Нужно продумать кейс отсутсвия пользователя по переданному msisdn и где это будет обрабатываться
         String fullName = users.get(msisdn);
         if (fullName != null) {
             return fullName;
