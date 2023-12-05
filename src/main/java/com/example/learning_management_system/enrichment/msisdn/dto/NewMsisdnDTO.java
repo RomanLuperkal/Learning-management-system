@@ -1,4 +1,4 @@
-package com.example.learning_management_system.enrichment.dto;
+package com.example.learning_management_system.enrichment.msisdn.dto;
 
 import lombok.Builder;
 import lombok.Data;
@@ -6,7 +6,6 @@ import lombok.Data;
 @Data
 @Builder
 public class NewMsisdnDTO {
-    //todo дописать классы дто
     private String action;
     private String page;
     //todo валидация msisdn

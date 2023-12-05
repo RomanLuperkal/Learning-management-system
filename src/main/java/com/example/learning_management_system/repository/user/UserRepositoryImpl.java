@@ -1,6 +1,6 @@
 package com.example.learning_management_system.repository.user;
 
-import com.example.learning_management_system.exception.EnrichException;
+import com.example.learning_management_system.exception.UserNotFoundException;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -16,13 +16,13 @@ public class UserRepositoryImpl implements UserRepository{
     }};
 
     @Override
-    public String getUserFullname(Long msisdn) throws EnrichException {
+    public String getUserFullname(Long msisdn) throws UserNotFoundException {
         //todo Нужно продумать кейс отсутсвия пользователя по переданному msisdn и где это будет обрабатываться
         String fullName = users.get(msisdn);
         if (fullName != null) {
             return fullName;
         } else {
-            throw new EnrichException();
+            throw new UserNotFoundException();
         }
     }
 }

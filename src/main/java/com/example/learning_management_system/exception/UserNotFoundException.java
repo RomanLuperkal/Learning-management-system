@@ -5,6 +5,6 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class EnrichException extends Exception {
+public class UserNotFoundException extends Exception {
     private String message;
 }

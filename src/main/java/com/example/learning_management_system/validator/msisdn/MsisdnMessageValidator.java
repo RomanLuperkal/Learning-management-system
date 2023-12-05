@@ -13,25 +13,25 @@ import java.util.Arrays;
 @Component("MSISDN")
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public abstract class MsisdnMessageValidator implements MessageValidator {
-    private static final ObjectMapper objectMapper = new ObjectMapper();
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     @Override
     public Boolean validMessage(Message message) {
         return isValidJson(message.getContent());
     }
 
-    private static Boolean isValidJson(String content) {
+    private  Boolean isValidJson(String content) {
         try {
             JsonNode json = objectMapper.readTree(content);
-            return isEnrichmentFieldExists(json);
+            return isKeyFieldsValid(json);
         } catch (Exception e) {
             return false;
         }
     }
 
-    private static Boolean isEnrichmentFieldExists(JsonNode json) {
-        //todo реализовать проверку всех плоей json
+    private  Boolean isKeyFieldsValid(JsonNode json) {
         return Arrays.stream(Message.EnrichmentType.values()).map(Enum::toString)
-                .anyMatch(typeName -> json.get(typeName) == null);
+                .anyMatch(typeName -> json.get(typeName) != null && json.get(typeName).isLong()) && json.get("action") != null
+                && json.get("page") != null;
     }
 }
